@@ -9,7 +9,7 @@ paths:
 When working with Repositories, data sources or the `data:sourcesImpl:remote` models/mappers:
 
 - Network DTOs (`Network*`, Retrofit/Moshi) and their mapping to Domain live exclusively in `data:sourcesImpl:remote`, never in `data:repositoryImpl`. `data:repositoryImpl` only orchestrates (local/remote/cache) and works with already-mapped Domain objects; it never touches a DTO.
-- Retrofit services return `Result<Error, T>` directly (`suspend fun getTodos(): Result<Error, List<NetworkTodo>>`): `ResultCallAdapterFactory` makes this possible by translating HTTP codes and parsing/network exceptions into `Error`. Do not wrap a call in `try/catch` or return `Response<T>`: if an error case is missing, add it in `ResultResponseCall`.
+- Retrofit services return `Result<Error, T>` directly (`suspend fun getTodos(): Result<Error, NetworkTodoPage>`): `ResultCallAdapterFactory` makes this possible by translating HTTP codes and parsing/network exceptions into `Error`. Do not wrap a call in `try/catch` or return `Response<T>`: if an error case is missing, add it in `ResultResponseCall`.
 - `Network*` classes, services and `Impl`s are `internal`: the module uses `explicitApi()` and only exposes its Koin module (`remoteModule`/`localModule`).
 - Mapper naming: extension function `internal fun Network<X>.to<DomainName>(): DomainType`, next to the DTO for simple cases (`NetworkTodo.toTodo()` in `NetworkTodo.kt`) or in a dedicated `mapper/*.kt` file when the mapping is complex and multi-field.
 - **Method order within the same resource group**: alphabetical within the cluster of the same resource, and the same order in the `interface`, its `Impl` and the Retrofit service.
@@ -97,7 +97,7 @@ internal fun NetworkThing.toThing(): Thing =
 
 Why: silent defaults cause downstream bugs (sending an empty id to an endpoint, blank cards in the UI without knowing data is missing). If the data does not come, the nullable travels up to the layer that decides what to show.
 
-**About `NetworkTodo`**: the sample DTO declares all its fields non-nullable because `jsonplaceholder` always sends them. With Moshi codegen, a non-nullable field missing from the JSON throws `JsonDataException` and the whole response fails (`Error.JsonSyntax`). Do not copy it as a template for a real backend: decide nullability field by field from the contract.
+**About `NetworkTodo`**: the sample DTO declares all its fields non-nullable because DummyJSON always sends them. With Moshi codegen, a non-nullable field missing from the JSON throws `JsonDataException` and the whole response fails (`Error.JsonSyntax`). Do not copy it as a template for a real backend: decide nullability field by field from the contract.
 
 ## Backend → Domain enum mapping
 

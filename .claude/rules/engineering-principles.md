@@ -75,7 +75,7 @@ The module/folder structure must communicate the business domain, not the framew
 
 Before treating a placement or design decision as ambiguous, look for an established pattern in the project: theory (Clean Architecture, SOLID) breaks ties when there is no precedent, not before. Grep for similar naming/module conventions before concluding "there is no precedent for this": the right precedent may live one level up or in a sibling module.
 
-Note: this is a template, and part of the code is sample code (the *Todo* feature against `jsonplaceholder`). A template sample is a starting point, not a standard (see `proactive-critique.md`).
+Note: this is a template, and part of the code is sample code (the *Todo* feature against `DummyJSON`). A template sample is a starting point, not a standard (see `proactive-critique.md`).
 
 ---
 
