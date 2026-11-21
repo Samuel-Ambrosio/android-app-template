@@ -4,7 +4,7 @@
 
 **A modular, ready-to-ship starting point for Android apps built with Kotlin and Jetpack Compose.**
 
-[![CI](https://github.com/Samuel-Ambrosio/BaseProject/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/Samuel-Ambrosio/BaseProject/actions/workflows/ci.yml)
+[![CI](https://github.com/Samuel-Ambrosio/android-app-template/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/Samuel-Ambrosio/android-app-template/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 ![Kotlin](https://img.shields.io/badge/Kotlin-2.4-7F52FF?logo=kotlin&logoColor=white)
 ![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-4285F4?logo=jetpackcompose&logoColor=white)
