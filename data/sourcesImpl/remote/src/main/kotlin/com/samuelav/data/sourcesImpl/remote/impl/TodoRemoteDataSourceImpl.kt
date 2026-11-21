@@ -13,5 +13,5 @@ internal class TodoRemoteDataSourceImpl(
 ) : TodoRemoteDataSource {
 
     override suspend fun getAll(): Result<Error, List<Todo>> =
-        todoService.getTodos().mapSuccess { it.map { networkTodo -> networkTodo.toTodo() } }
+        todoService.getTodos().mapSuccess { page -> page.todos.map { networkTodo -> networkTodo.toTodo() } }
 }

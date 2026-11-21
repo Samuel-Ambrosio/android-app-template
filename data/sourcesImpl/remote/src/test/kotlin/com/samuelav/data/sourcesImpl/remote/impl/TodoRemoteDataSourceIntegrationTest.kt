@@ -48,12 +48,17 @@ class TodoRemoteDataSourceIntegrationTest {
     }
 
     @Test
-    fun `requests GET todos and maps the body to domain todos`() = runTest {
+    fun `requests GET todos without page limit and maps the body to domain todos`() = runTest {
         server.enqueue(
             MockResponse.Builder()
                 .code(200)
                 .body(
-                    """[{"userId":1,"id":1,"title":"First","completed":false},{"userId":1,"id":2,"title":"Second","completed":true}]"""
+                    """
+                    {"todos":[
+                        {"userId":1,"id":1,"todo":"First","completed":false},
+                        {"userId":1,"id":2,"todo":"Second","completed":true}
+                    ],"total":2,"skip":0,"limit":0}
+                    """.trimIndent()
                 )
                 .build()
         )
@@ -72,6 +77,7 @@ class TodoRemoteDataSourceIntegrationTest {
         val request = server.takeRequest()
         assertEquals("GET", request.method)
         assertEquals("/todos", request.url.encodedPath)
+        assertEquals("0", request.url.queryParameter("limit"))
     }
 
     @Test
@@ -140,7 +146,7 @@ class TodoRemoteDataSourceIntegrationTest {
 
     @Test
     fun `maps a malformed successful body to JsonSyntax`() = runTest {
-        server.enqueue(MockResponse.Builder().code(200).body("""[{"userId":1,"id":1}]""").build())
+        server.enqueue(MockResponse.Builder().code(200).body("""{"todos":[{"userId":1,"id":1}]}""").build())
 
         assertEquals(Result.Failure(Error.JsonSyntax), sut.getAll())
     }

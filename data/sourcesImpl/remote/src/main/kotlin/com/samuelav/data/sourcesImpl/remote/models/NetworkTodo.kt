@@ -7,7 +7,7 @@ import com.squareup.moshi.JsonClass
 internal data class NetworkTodo(
     val userId: Int,
     val id: Int,
-    val title: String,
+    val todo: String,
     val completed: Boolean,
 )
 
@@ -15,6 +15,6 @@ internal fun NetworkTodo.toTodo() =
     Todo(
         userId = userId,
         id = id,
-        title = title,
+        title = todo,
         completed = completed,
     )

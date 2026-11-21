@@ -10,15 +10,15 @@ extensions.configure<CommonExtension> {
     productFlavors.apply {
         create("dev") {
             dimension = "environment"
-            buildConfigField("String", "API_BASE_PATH", "\"https://jsonplaceholder.typicode.com/\"")
+            buildConfigField("String", "API_BASE_PATH", "\"https://dummyjson.com/\"")
         }
         create("pre") {
             dimension = "environment"
-            buildConfigField("String", "API_BASE_PATH", "\"https://jsonplaceholder.typicode.com/\"")
+            buildConfigField("String", "API_BASE_PATH", "\"https://dummyjson.com/\"")
         }
         create("pro") {
             dimension = "environment"
-            buildConfigField("String", "API_BASE_PATH", "\"https://jsonplaceholder.typicode.com/\"")
+            buildConfigField("String", "API_BASE_PATH", "\"https://dummyjson.com/\"")
         }
     }
 }

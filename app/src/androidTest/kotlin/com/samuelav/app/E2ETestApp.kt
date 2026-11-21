@@ -26,7 +26,7 @@ class E2ETestApp : App() {
 
 object FakeBackend {
     @Volatile
-    var todosResponse: FakeResponse = FakeResponse(code = 200, body = "[]")
+    var todosResponse: FakeResponse = FakeResponse(code = 200, body = """{"todos":[]}""")
 
     fun respond(chain: Interceptor.Chain): Response {
         val fake = todosResponse

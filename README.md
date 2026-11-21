@@ -70,7 +70,7 @@ Work through this list top to bottom. Everything marked *optional* can stay as i
 ### 3️⃣ Backend <sup>`required`</sup>
 
 - [ ] `API_BASE_PATH` per environment (`dev` / `pre` / `pro`) in `build-logic/src/main/kotlin/convention.android.flavors.gradle.kts`.
-- [ ] Replace the sample *Todo* feature (`jsonplaceholder`): `TodoService`, `NetworkTodo`, `TodoRemoteDataSource(Impl)`, `TodoRepository(Impl)`, `GetAllTodosUseCase`, `Todo` and the home screen that uses it.
+- [ ] Replace the sample *Todo* feature (`DummyJSON`): `TodoService`, `NetworkTodo`, `TodoRemoteDataSource(Impl)`, `TodoRepository(Impl)`, `GetAllTodosUseCase`, `Todo` and the home screen that uses it.
 
 ### 4️⃣ Firebase — Analytics + Crashlytics <sup>`required before release`</sup>
 

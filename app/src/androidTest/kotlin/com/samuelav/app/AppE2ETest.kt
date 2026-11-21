@@ -34,9 +34,9 @@ class AppE2ETest {
     fun homeShowsTheTodosReturnedByTheApi() {
         FakeBackend.todosResponse = FakeBackend.FakeResponse(
             code = 200,
-            body = """[{"userId":1,"id":1,"title":"First","completed":false},
-                |{"userId":1,"id":2,"title":"Second","completed":true},
-                |{"userId":2,"id":3,"title":"Third","completed":false}]""".trimMargin(),
+            body = """{"todos":[{"userId":1,"id":1,"todo":"First","completed":false},
+                |{"userId":1,"id":2,"todo":"Second","completed":true},
+                |{"userId":2,"id":3,"todo":"Third","completed":false}]}""".trimMargin(),
         )
 
         launchApp()
@@ -55,7 +55,7 @@ class AppE2ETest {
 
         FakeBackend.todosResponse = FakeBackend.FakeResponse(
             code = 200,
-            body = """[{"userId":1,"id":1,"title":"First","completed":false}]""",
+            body = """{"todos":[{"userId":1,"id":1,"todo":"First","completed":false}]}""",
         )
         composeTestRule.onNodeWithText(resources.getString(CommonR.string.retry)).performClick()
 
@@ -64,7 +64,7 @@ class AppE2ETest {
 
     @Test
     fun bottomNavigationMovesBetweenSectionsAndBackReturnsHome() {
-        FakeBackend.todosResponse = FakeBackend.FakeResponse(code = 200, body = "[]")
+        FakeBackend.todosResponse = FakeBackend.FakeResponse(code = 200, body = """{"todos":[]}""")
         launchApp()
         composeTestRule.waitUntilExactlyOneExists(hasText("Todos: 0"), TIMEOUT_MILLIS)
 

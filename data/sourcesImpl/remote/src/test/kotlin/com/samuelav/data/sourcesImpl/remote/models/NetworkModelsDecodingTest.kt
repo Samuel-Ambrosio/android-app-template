@@ -23,11 +23,11 @@ class NetworkModelsDecodingTest {
 
     @Test
     fun `decodes a todo and maps it to the domain model`() {
-        val json = """{"userId":3,"id":7,"title":"Buy milk","completed":true}"""
+        val json = """{"userId":3,"id":7,"todo":"Buy milk","completed":true}"""
 
         val networkTodo = moshi.adapter(NetworkTodo::class.java).fromJson(json)
 
-        assertEquals(NetworkTodo(userId = 3, id = 7, title = "Buy milk", completed = true), networkTodo)
+        assertEquals(NetworkTodo(userId = 3, id = 7, todo = "Buy milk", completed = true), networkTodo)
         assertEquals(7, networkTodo?.toTodo()?.id)
         assertEquals("Buy milk", networkTodo?.toTodo()?.title)
     }
@@ -37,6 +37,18 @@ class NetworkModelsDecodingTest {
         val json = """{"userId":3,"id":7,"completed":true}"""
 
         assertFailsWith<JsonDataException> { moshi.adapter(NetworkTodo::class.java).fromJson(json) }
+    }
+
+    @Test
+    fun `decodes a todo page ignoring the pagination fields`() {
+        val json = """{"todos":[{"userId":3,"id":7,"todo":"Buy milk","completed":true}],"total":1,"skip":0,"limit":0}"""
+
+        val page = moshi.adapter(NetworkTodoPage::class.java).fromJson(json)
+
+        assertEquals(
+            NetworkTodoPage(todos = listOf(NetworkTodo(userId = 3, id = 7, todo = "Buy milk", completed = true))),
+            page,
+        )
     }
 
     @Test
